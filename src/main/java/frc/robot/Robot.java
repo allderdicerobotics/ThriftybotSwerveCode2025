@@ -11,7 +11,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.PS5Controller;
-import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.generated.SwerveConstants;
 
@@ -19,7 +19,7 @@ import frc.robot.generated.SwerveConstants;
 public class Robot extends TimedRobot {
   // private final XboxController m_controller = new XboxController(0);
   private final PS5Controller m_controller = new PS5Controller(0);
-  AHRS gyro = new AHRS(SPI.Port.kMXP); 
+  AHRS gyro = new AHRS(SerialPort.Port.kMXP); 
 
   
   
