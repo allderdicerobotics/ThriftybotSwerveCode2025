@@ -18,9 +18,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.generated.SwerveConstants;
 import frc.robot.generated.SwerveConstants.ModuleConstants;
 
+import com.gos.lib.properties.GosDoubleProperty;
+import com.gos.lib.properties.pid.PidProperty;
+import com.gos.lib.properties.pid.WpiPidPropertyBuilder;
 
-
-public class SwerveModule {
+public class SwerveModule {    
     // Motors
     private final ThriftyNova m_driveMotor;
     private final ThriftyNova m_azimuthMotor;
@@ -35,6 +37,12 @@ public class SwerveModule {
     
     // PID controller for Thrifty encoder (RIO-side control)
     private final PIDController m_turningPID = new PIDController(0.02, 0.0, 0.01);
+
+    private final PidProperty pidProperties = new WpiPidPropertyBuilder("Swerve Turning PID", false, m_turningPID).
+    addP(0.07)
+    .addD(0)
+    .addI(0)
+    .build();
     
     // Flag to track if we've checked for saved offsets yet (avoids blocking during init)
     private boolean m_hasCheckedSavedOffset = false;
@@ -193,6 +201,9 @@ public class SwerveModule {
         
         // Set azimuth motor position
         setAzimuthPosition(desiredState.angle.getRadians());
+
+
+        pidProperties.updateIfChanged();
     }
     
     /**
