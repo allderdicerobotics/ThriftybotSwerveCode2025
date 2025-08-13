@@ -46,6 +46,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     driveWithJoystick(true);
+    // manualControl();
   }
 
   private void driveWithJoystick(boolean fieldRelative) {
@@ -72,5 +73,9 @@ public class Robot extends TimedRobot {
 
     m_swerve.drive(xSpeed, ySpeed, rot, fieldRelative, getPeriod());
     // m_simSwerve.drive(xSpeed, ySpeed, rot, fieldRelative, getPeriod());
+  }
+
+  private void manualControl() {
+   m_swerve.manualDrive(m_controller.getLeftY(), m_controller.getRightX());
   }
 }

@@ -18,6 +18,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.generated.SwerveConstants;
 import frc.robot.generated.SwerveConstants.ModuleConstants;
 
+
+
 public class SwerveModule {
     // Motors
     private final ThriftyNova m_driveMotor;
@@ -300,5 +302,10 @@ public class SwerveModule {
     
     private double ticksToDegrees(double ticks) {
         return (ticks / m_encoderTicksPerRevolution) * 360.0;
+    }
+
+    public void driveManual(double forward, double rotation) {
+        m_driveMotor.set(forward);
+        m_azimuthMotor.set(rotation);
     }
 }

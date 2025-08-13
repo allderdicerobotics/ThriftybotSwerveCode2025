@@ -11,6 +11,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructArrayPublisher;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.generated.SwerveConstants;
 import frc.robot.generated.SwerveConstants.ModuleConstants;
@@ -49,6 +51,9 @@ public class Drivetrain {
         "Back Right");
         
     private final Supplier<Rotation2d> m_gyroSupplier;
+
+    private final StructArrayPublisher<SwerveModuleState> actualStatePublisher = NetworkTableInstance.getDefault().getStructArrayTopic("Measured Swerve", SwerveModuleState.struct).publish();
+    private final StructArrayPublisher<SwerveModuleState> goalStatePublisher = NetworkTableInstance.getDefault().getStructArrayTopic("Goal Swerve", SwerveModuleState.struct).publish();
 
     private final SwerveDriveKinematics m_kinematics =
         new SwerveDriveKinematics(
@@ -101,6 +106,16 @@ public class Drivetrain {
         m_frontRight.setDesiredState(swerveModuleStates[1]);
         m_backLeft.setDesiredState(swerveModuleStates[2]);
         m_backRight.setDesiredState(swerveModuleStates[3]);
+
+        
+        goalStatePublisher.set(
+            new SwerveModuleState[]{
+                swerveModuleStates[0],
+                swerveModuleStates[1],
+                swerveModuleStates[2],
+                swerveModuleStates[3],
+            }
+        );
     }
 
     /** Updates the field relative position of the robot. */
@@ -180,6 +195,15 @@ public class Drivetrain {
         m_frontRight.updateSmartDashboard();
         m_backLeft.updateSmartDashboard();
         m_backRight.updateSmartDashboard();
+
+        actualStatePublisher.set(
+            new SwerveModuleState[]{
+                m_frontLeft.getSwerveState(),
+                m_frontRight.getSwerveState(),
+                m_backLeft.getSwerveState(),
+                m_backRight.getSwerveState(),
+            }
+        );
         
         // Robot pose information
         Pose2d currentPose = getPose();
@@ -248,5 +272,14 @@ public class Drivetrain {
             SmartDashboard.putBoolean("Stop All Modules", false);
             System.out.println("All modules stopped");
         }
+
+
+    }
+
+    public void manualDrive (double forward, double rotation) {
+        m_frontLeft.driveManual(forward, rotation);
+        m_frontRight.driveManual(forward, rotation);
+        m_backLeft.driveManual(forward, rotation);
+        m_backRight.driveManual(forward, rotation);
     }
 }

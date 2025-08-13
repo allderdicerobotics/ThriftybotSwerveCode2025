@@ -31,10 +31,10 @@ public final class SwerveConstants {
     private static final double HALF_LENGTH = DRIVE_BASE_LENGTH_METERS / 2.0;
     
     // Kinematics
-    public static final Translation2d FRONT_LEFT_LOCATION = new Translation2d(0.3048, -0.3048);
-    public static final Translation2d FRONT_RIGHT_LOCATION = new Translation2d(0.3048, 0.3048);
-    public static final Translation2d BACK_LEFT_LOCATION = new Translation2d(-0.3048, -0.3048);
-    public static final Translation2d BACK_RIGHT_LOCATION = new Translation2d(-0.3048, 0.3048);
+    public static final Translation2d FRONT_LEFT_LOCATION = new Translation2d(0.3048, 0.3048);
+    public static final Translation2d FRONT_RIGHT_LOCATION = new Translation2d(0.3048, -0.3048);
+    public static final Translation2d BACK_LEFT_LOCATION = new Translation2d(-0.3048, 0.3048);
+    public static final Translation2d BACK_RIGHT_LOCATION = new Translation2d(-0.3048, -0.3048);
     
     public static final SwerveDriveKinematics DRIVE_KINEMATICS = new SwerveDriveKinematics(
         FRONT_LEFT_LOCATION,
@@ -53,25 +53,25 @@ public final class SwerveConstants {
         // Front Left Module
         public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 3;
         public static final int FRONT_LEFT_AZIMUTH_MOTOR_ID = 4;
-        public static final double FRONT_LEFT_ENCODER_OFFSET = 3529.0;
+        public static final double FRONT_LEFT_ENCODER_OFFSET = 2727.0;
         public static final boolean FRONT_LEFT_DRIVE_MOTOR_INVERTED = false;
         
         // Front Right Module
         public static final int FRONT_RIGHT_DRIVE_MOTOR_ID = 5;
         public static final int FRONT_RIGHT_AZIMUTH_MOTOR_ID = 6;
-        public static final double FRONT_RIGHT_ENCODER_OFFSET = 747.0;
+        public static final double FRONT_RIGHT_ENCODER_OFFSET = 543.0;
         public static final boolean FRONT_RIGHT_DRIVE_MOTOR_INVERTED = false;
         
         // Back Left Module
         public static final int BACK_LEFT_DRIVE_MOTOR_ID = 1;
         public static final int BACK_LEFT_AZIMUTH_MOTOR_ID = 2;
-        public static final double BACK_LEFT_ENCODER_OFFSET = 2552.0;
+        public static final double BACK_LEFT_ENCODER_OFFSET = 1561.0;
         public static final boolean BACK_LEFT_DRIVE_MOTOR_INVERTED = false;
         
         // Back Right Module
         public static final int BACK_RIGHT_DRIVE_MOTOR_ID = 7;
         public static final int BACK_RIGHT_AZIMUTH_MOTOR_ID = 8;
-        public static final double BACK_RIGHT_ENCODER_OFFSET = 121.2;
+        public static final double BACK_RIGHT_ENCODER_OFFSET = 2191.2;
         public static final boolean BACK_RIGHT_DRIVE_MOTOR_INVERTED = false;
         
         // Common encoder type
