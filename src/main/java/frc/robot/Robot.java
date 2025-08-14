@@ -21,9 +21,6 @@ public class Robot extends TimedRobot {
   private final PS5Controller m_controller = new PS5Controller(0);
   AHRS gyro = new AHRS(SerialPort.Port.kMXP); 
 
-  
-  
-
   private final Drivetrain m_swerve = new Drivetrain(() -> Rotation2d.fromDegrees(gyro.getYaw()), new Pose2d());  // private final SimDrivetrain m_simSwerve = new SimDrivetrain(new Pose2d());
 
   // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0 to 1.
